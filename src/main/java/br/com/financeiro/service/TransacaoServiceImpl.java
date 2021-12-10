@@ -1,9 +1,10 @@
-package service;
+package br.com.financeiro.service;
 
-import model.Transacao;
+import br.com.financeiro.model.Transacao;
 import org.springframework.stereotype.Service;
-import repository.TransacaoRepository;
+import br.com.financeiro.repository.TransacaoRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -16,13 +17,14 @@ public class TransacaoServiceImpl implements TransacaoService {
     }
 
     @Override
-    public Transacao buscaPorId(Integer id) {
-        return null;
+    public Transacao buscarPorId(Integer id) {
+        return transacaoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Transacao de id " + id + " não encontrado"));
     }
 
     @Override
     public List<Transacao> buscarTodos() {
-        return null;
+        return transacaoRepository.findAll();
     }
 
     @Override
@@ -37,6 +39,7 @@ public class TransacaoServiceImpl implements TransacaoService {
 
     @Override
     public List<Transacao> buscarPorCategoriaId(Integer id) {
-        return null;
+
+        return transacaoRepository.findAllByCategoriaId(id);
     }
 }

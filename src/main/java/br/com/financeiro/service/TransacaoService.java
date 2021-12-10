@@ -1,12 +1,12 @@
-package service;
+package br.com.financeiro.service;
 
-import model.Transacao;
+import br.com.financeiro.model.Transacao;
 
 import java.util.List;
 
 public interface TransacaoService {
 
-    Transacao buscaPorId(Integer id);
+    Transacao buscarPorId(Integer id);
 
     List<Transacao> buscarTodos();
 

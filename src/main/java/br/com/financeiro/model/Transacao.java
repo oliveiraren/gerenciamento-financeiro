@@ -1,7 +1,8 @@
-package model;
+package br.com.financeiro.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 public class Transacao {
@@ -11,7 +12,7 @@ public class Transacao {
     private Integer id;
 
     private BigDecimal valor;
-    private String tipoValor;
+    private LocalDate data = LocalDate.now();
     private BigDecimal saldo = BigDecimal.valueOf(0);
     @ManyToOne(cascade = CascadeType.ALL)
     private Categoria categoria;
@@ -31,6 +32,8 @@ public class Transacao {
         return valor;
     }
 
+    public LocalDate getData() {return data; }
+
     public BigDecimal getSaldo() {
         return saldo;
     }
@@ -38,4 +41,5 @@ public class Transacao {
     public Categoria getCategoria() {
         return categoria;
     }
+
 }
