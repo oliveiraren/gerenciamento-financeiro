@@ -1,5 +1,6 @@
 package br.com.financeiro.service;
 
+import br.com.financeiro.dto.TransacaoDto;
 import br.com.financeiro.model.Transacao;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface TransacaoService {
 
     List<Transacao> buscarTodos();
 
-    Transacao salvar(Transacao transacao);
+    Transacao cadastrar(Transacao transacao);
 
     void remover(Integer id);
 

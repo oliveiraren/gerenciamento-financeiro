@@ -1,26 +1,17 @@
 package br.com.financeiro.dto;
 
 import br.com.financeiro.model.Categoria;
+import br.com.financeiro.model.Categoria;
 
 public class CategoriaDto {
 
-    private Integer id;
     private String nome;
 
-    public CategoriaDto(Integer id, String nome) {
-        this.id = id;
+    public CategoriaDto(String nome) {
         this.nome = nome;
     }
 
     protected CategoriaDto() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public void setNome(String nome) {
@@ -31,7 +22,7 @@ public class CategoriaDto {
         return nome;
     }
 
-    public static CategoriaDto converte(Categoria categoria) {
-        return new CategoriaDto(categoria.getId(), categoria.getNome());
+    public Categoria converte() {
+        return new Categoria(nome);
     }
 }

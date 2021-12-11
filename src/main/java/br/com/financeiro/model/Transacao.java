@@ -15,10 +15,12 @@ public class Transacao {
     private LocalDate data = LocalDate.now();
     private BigDecimal saldo = BigDecimal.valueOf(0);
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     public Transacao(BigDecimal valor, Categoria categoria) {
         this.saldo = saldo;
+        this.categoria = categoria;
     }
 
     protected Transacao() {

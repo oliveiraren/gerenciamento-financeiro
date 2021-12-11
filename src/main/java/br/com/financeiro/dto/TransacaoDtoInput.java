@@ -6,12 +6,11 @@ import java.time.LocalDate;
 public class TransacaoDtoInput {
 
     private BigDecimal valor;
-    private LocalDate data;
+    private LocalDate data = LocalDate.now();
     private Integer categoriaId;
 
-    public TransacaoDtoInput(BigDecimal valor, LocalDate data, Integer categoriaId) {
+    public TransacaoDtoInput(BigDecimal valor, Integer categoriaId) {
         this.valor = valor;
-        this.data = data;
         this.categoriaId = categoriaId;
     }
 

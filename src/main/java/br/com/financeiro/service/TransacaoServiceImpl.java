@@ -1,5 +1,6 @@
 package br.com.financeiro.service;
 
+import br.com.financeiro.dto.TransacaoDto;
 import br.com.financeiro.model.Transacao;
 import org.springframework.stereotype.Service;
 import br.com.financeiro.repository.TransacaoRepository;
@@ -27,8 +28,15 @@ public class TransacaoServiceImpl implements TransacaoService {
         return transacaoRepository.findAll();
     }
 
+//    @Override
+//    public Transacao cadastrar(TransacaoDto transacaoDto) {
+//        Transacao transacao = transacaoDto.converte();
+//        return transacaoRepository.save(transacao);
+//    }
+
     @Override
-    public Transacao salvar(Transacao transacao) {
+    public Transacao cadastrar(Transacao transacao) {
+        // TODO Auto-generated method stub
         return null;
     }
 

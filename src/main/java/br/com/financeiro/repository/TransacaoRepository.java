@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface TransacaoRepository extends JpaRepository<Transacao, Integer> {
 
-    @Query(value = "SELECT p FROM Produto p JOIN p.categoria c WHERE p.categoria.id = :id")
+    @Query(value = "SELECT t FROM Transacao t JOIN t.categoria c WHERE t.categoria.id = :id")
     List<Transacao> findAllByCategoriaId(Integer id);
 }
