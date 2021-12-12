@@ -11,32 +11,32 @@ import java.util.List;
 @Service
 public class CategoriaServiceImpl implements CategoriaService {
 
-    private final CategoriaRepository CategoriaRepository;
+    private final CategoriaRepository categoriaRepository;
 
-    public CategoriaServiceImpl(CategoriaRepository CategoriaRepository) {
-        this.CategoriaRepository = CategoriaRepository;
+    public CategoriaServiceImpl(CategoriaRepository categoriaRepository) {
+        this.categoriaRepository = categoriaRepository;
     }
 
     @Override
     public Categoria buscarPorId(Integer id) {
-        return CategoriaRepository.findById(id)
+        return categoriaRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Categoria de id " + id + " não encontrado"));
     }
 
     @Override
     public List<Categoria> buscarTodos() {
-        return CategoriaRepository.findAll();
+        return categoriaRepository.findAll();
     }
 
     @Override
     public Categoria cadastrar(CategoriaDto CategoriaDto) {
         Categoria Categoria = CategoriaDto.converte();
-        return CategoriaRepository.save(Categoria);
+        return categoriaRepository.save(Categoria);
     }
 
     @Override
     public void remover(Integer id) {
-
+        categoriaRepository.deleteById(id);
     }
 
 }

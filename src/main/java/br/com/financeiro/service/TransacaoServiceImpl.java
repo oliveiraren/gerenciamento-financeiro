@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -35,18 +36,29 @@ public class TransacaoServiceImpl implements TransacaoService {
     public Transacao cadastrar(TransacaoDto transacaoDto) {
 
         Categoria categoria = categoriaRepository.getOne(transacaoDto.getCategoriaId());
+        String categoriaNome = categoriaRepository.nomeCategoriaId(transacaoDto.getCategoriaId());
+        String nomeCategoria = "Lazer";
+        if (categoriaNome.equals(nomeCategoria)) {
+            BigDecimal totalLazer = transacaoRepository.limiteCategoriaLazer(transacaoDto.getCategoriaId());
+            if (totalLazer.add(transacaoDto.getValor()).compareTo(BigDecimal.valueOf(200.00)) >= 0) {
+                return null;
+            } else {
+                Transacao transacao = new Transacao((transacaoDto.getValor()), transacaoDto.getTipo(), categoria);
+                return transacaoRepository.save(transacao);
+            }
+        }
         Transacao transacao = new Transacao((transacaoDto.getValor()), transacaoDto.getTipo(), categoria);
         return transacaoRepository.save(transacao);
     }
 
-    @Override
-    public void remover(Integer id) {
-        transacaoRepository.deleteById(id);
-    }
+        @Override
+        public void remover (Integer id){
+            transacaoRepository.deleteById(id);
+        }
 
-    @Override
-    public List<Transacao> buscarPorCategoriaId(Integer id) {
+        @Override
+        public List<Transacao> buscarPorCategoriaId (Integer id){
 
-        return transacaoRepository.findAllByCategoriaId(id);
+            return transacaoRepository.findAllByCategoriaId(id);
+        }
     }
-}
