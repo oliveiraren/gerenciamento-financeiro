@@ -1,9 +1,12 @@
 package br.com.financeiro.service;
 
 import br.com.financeiro.dto.TransacaoDto;
+import br.com.financeiro.model.Categoria;
 import br.com.financeiro.model.Transacao;
-import org.springframework.stereotype.Service;
+import br.com.financeiro.repository.CategoriaRepository;
 import br.com.financeiro.repository.TransacaoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -11,11 +14,11 @@ import java.util.List;
 @Service
 public class TransacaoServiceImpl implements TransacaoService {
 
-    private final TransacaoRepository transacaoRepository;
+    @Autowired
+    TransacaoRepository transacaoRepository;
 
-    public TransacaoServiceImpl(TransacaoRepository transacaoRepository) {
-        this.transacaoRepository = transacaoRepository;
-    }
+    @Autowired
+    CategoriaRepository categoriaRepository;
 
     @Override
     public Transacao buscarPorId(Integer id) {
@@ -28,21 +31,17 @@ public class TransacaoServiceImpl implements TransacaoService {
         return transacaoRepository.findAll();
     }
 
-//    @Override
-//    public Transacao cadastrar(TransacaoDto transacaoDto) {
-//        Transacao transacao = transacaoDto.converte();
-//        return transacaoRepository.save(transacao);
-//    }
-
     @Override
-    public Transacao cadastrar(Transacao transacao) {
-        // TODO Auto-generated method stub
-        return null;
+    public Transacao cadastrar(TransacaoDto transacaoDto) {
+
+        Categoria categoria = categoriaRepository.getOne(transacaoDto.getCategoriaId());
+        Transacao transacao = new Transacao((transacaoDto.getValor()), transacaoDto.getTipo(), categoria);
+        return transacaoRepository.save(transacao);
     }
 
     @Override
     public void remover(Integer id) {
-
+        transacaoRepository.deleteById(id);
     }
 
     @Override

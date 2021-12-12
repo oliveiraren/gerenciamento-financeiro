@@ -11,7 +11,7 @@ public interface TransacaoService {
 
     List<Transacao> buscarTodos();
 
-    Transacao cadastrar(Transacao transacao);
+    Transacao cadastrar(TransacaoDto transacaoDto);
 
     void remover(Integer id);
 

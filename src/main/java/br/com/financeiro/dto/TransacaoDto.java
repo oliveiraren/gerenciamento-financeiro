@@ -1,7 +1,6 @@
 package br.com.financeiro.dto;
 
-import br.com.financeiro.model.Categoria;
-import br.com.financeiro.model.Transacao;
+import br.com.financeiro.enumeration.TransacaoEnum;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -9,12 +8,13 @@ import java.time.LocalDate;
 public class TransacaoDto {
 
     private BigDecimal valor;
+    private TransacaoEnum tipo;
     private LocalDate data;
-    private BigDecimal saldo;
-//    private Categoria categoria;
     private Integer categoriaId;
-    public TransacaoDto(BigDecimal valor, Integer categoriaId) {
+
+    public TransacaoDto(BigDecimal valor, TransacaoEnum tipo, Integer categoriaId) {
         this.valor = valor;
+        this.tipo = tipo;
         this.categoriaId = categoriaId;
     }
 
@@ -22,24 +22,16 @@ public class TransacaoDto {
         return valor;
     }
 
-    public LocalDate getData() {
-        return data;
+    public TransacaoEnum getTipo() {
+        return tipo;
     }
 
-    public BigDecimal getSaldo() {
-        return saldo;
+    public LocalDate getData() {
+        return data;
     }
 
     public Integer getCategoriaId() {
         return categoriaId;
     }
-
-    public void setCategoriaId(Categoria categoria) {
-        this.categoriaId = categoriaId;
-    }
-
-//    public Transacao converte() {
-//            return new Transacao(valor, categoriaId);
-//    }
 
 }

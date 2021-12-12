@@ -1,5 +1,8 @@
 package br.com.financeiro.model;
 
+import br.com.financeiro.enumeration.TransacaoEnum;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,14 +15,16 @@ public class Transacao {
     private Integer id;
 
     private BigDecimal valor;
+    private TransacaoEnum tipo;
     private LocalDate data = LocalDate.now();
-    private BigDecimal saldo = BigDecimal.valueOf(0);
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "categoria_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Categoria categoria;
 
-    public Transacao(BigDecimal valor, Categoria categoria) {
-        this.saldo = saldo;
+    public Transacao(BigDecimal valor, TransacaoEnum tipo, Categoria categoria) {
+        this.valor = valor;
+        this.tipo = tipo;
         this.categoria = categoria;
     }
 
@@ -34,10 +39,12 @@ public class Transacao {
         return valor;
     }
 
-    public LocalDate getData() {return data; }
+    public TransacaoEnum getTipo() {
+        return tipo;
+    }
 
-    public BigDecimal getSaldo() {
-        return saldo;
+    public LocalDate getData() {
+        return data;
     }
 
     public Categoria getCategoria() {
