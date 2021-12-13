@@ -37,14 +37,15 @@ public class TransacaoServiceImpl implements TransacaoService {
 
         Categoria categoria = categoriaRepository.getOne(transacaoDto.getCategoriaId());
         String categoriaNome = categoriaRepository.nomeCategoriaId(transacaoDto.getCategoriaId());
-        String nomeCategoria = "Lazer";
-        if (categoriaNome.equals(nomeCategoria)) {
+        if (categoriaNome.equals("Lazer")) {
             BigDecimal totalLazer = transacaoRepository.limiteCategoriaLazer(transacaoDto.getCategoriaId());
-            if (totalLazer.add(transacaoDto.getValor()).compareTo(BigDecimal.valueOf(200.00)) >= 0) {
-                return null;
-            } else {
-                Transacao transacao = new Transacao((transacaoDto.getValor()), transacaoDto.getTipo(), categoria);
-                return transacaoRepository.save(transacao);
+            if (totalLazer != null) {
+                if (totalLazer.add(transacaoDto.getValor()).compareTo(BigDecimal.valueOf(200.00)) > 0) {
+                    return null;
+                } else {
+                    Transacao transacao = new Transacao((transacaoDto.getValor()), transacaoDto.getTipo(), categoria);
+                    return transacaoRepository.save(transacao);
+                }
             }
         }
         Transacao transacao = new Transacao((transacaoDto.getValor()), transacaoDto.getTipo(), categoria);

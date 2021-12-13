@@ -1,7 +1,6 @@
 package br.com.financeiro.dto;
 
 import br.com.financeiro.model.Categoria;
-import br.com.financeiro.model.Categoria;
 
 public class CategoriaDto {
 
